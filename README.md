@@ -277,9 +277,6 @@ print(" ")
 
 I’m sure we can do better if we trained this network, perhaps using a larger embedding and adding more hidden layers. Let’s try a different network type. Feel free to experiment with the hyperparameters and the number of layers.
 
-
-
-
 ## 2 - Summarizing  our model - 02_Test_the_model.py
 
 It is time to summarize all the most relevant informations regarding our just trained model. To do this I created a separated .py which display a summary on a dedicated screen:
@@ -349,9 +346,6 @@ root.mainloop()
 ## 3 - Using our model to predict a sentiment  - 03_Predict_with_the_model.py
 Of course at the end we want to use our model in an application. So we want to use it to create predictions. In order to do so we need to translate our sentence into the corresponding word integers and then pad it to match our data. We can then feed it into our model and see if how it thinks we liked or disliked the movie.
 
-# Summary
-
-In this Post you learned what Sentiment Analysis is and why Keras is one of the most used Deep Learning libraries. On top of that you learned that Keras made a big contribution to the commoditization of deep learning and artificial intelligence. You learned how to build a simple Neural Network with six layers that can predict the sentiment of movie reviews, which achieves a 89% accuracy. You can now use this model to also do binary sentiment analysis on other sources of text but you need to change them all to a length of 10,000 or you change the input-shape of the input layer. You can also apply this model to other related machine learning problems with only a few changes.
 
         # Using the model to predict sentiments on two specific phrases. 
 
@@ -375,6 +369,17 @@ In this Post you learned what Sentiment Analysis is and why Keras is one of the 
         self.label = Label(master, text="Sentiment: " + sentiment)
         self.label.pack() 
 
+In this case a value close to 0 means the sentiment was negative and a value close to 1 means its a positive review. You can also use "model.predict_classes" to just get the classes of positive and negative.
+
+# Conclusions
+
+So, if everything went well you just had built quite a cool and simple Neural Network that can perform sentiment analysis for IMDB reviews that predicts if a movie review is positive or negative with almost 90% accuracy. With this we are already quite close to industry standards. 
+
+Also you learned what Sentiment Analysis is and why Keras is one of the most used Deep Learning libraries. On top of that you learned that Keras made a big contribution to the commoditization of deep learning and artificial intelligence. 
+
+You can now use this model to also do binary sentiment analysis on other sources of text simply changing them all to a length of 10,000 or changing the input-shape of the input layer. 
+
+You can also apply this model to other related machine learning problems with only a few changes.
 
 # Sources and resources:
 
@@ -395,4 +400,6 @@ https://github.com/wendykan/DeepLearningMovies
 https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
 
 https://www.liip.ch/en/blog/sentiment-detection-with-keras-word-embeddings-and-lstm-deep-learning-networks
+
+
 
