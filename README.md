@@ -1,7 +1,14 @@
 # SentimentAnalysisRNN-miniguide
 A step by step mini-guide about how your first RNN and use it for Sentiment Analysis
 
+# Purpose
+
+The purpose of this tutorial is to help anybody write their first RNN LSTM model without much background in Artificial Neural Networks or Machine Learning. The discussion is not centered on the theory or working of such networks but on writing code for solving a particular problem. We will understand how neural networks let us solve some problems effortlessly, and how they can be applied to a multitude of other problems.
+
 # Intro
+Sentiment analysis probably is one the most common applications in Natural Language processing.  In this step-by-step training, we will build a classifier movie reviews in IMDB data set, using Recurrent Neural Networks. If you want to dive deeper on deep learning for sentiment analysis, this is a good first step.
+
+We will use Recurrent Neural Networks, and in particular LSTMs, to perform sentiment analysis in Keras. Conveniently, Keras has a built-in IMDb movie reviews data set that we can use.
 
 Let me walk you through all of the steps needed to make a well working sentiment detection with Keras and long short-term memory networks. Keras is a very popular python deep learning library, similar to TFlearn that allows to create neural networks without writing too much boiler plate code. LSTM networks are a special form or network architecture especially useful for text tasks which I am going to explain later. 
 
@@ -11,6 +18,14 @@ Keras is an open source python library that enables you to easily build Neural N
 
 Google Keras made a big contribution to the commoditization of deep learning and artificial intelligence since it has commoditized powerful, modern Deep Learning algorithms that previously were not only inaccessible but also unusable as well.
 What is Sentiment Analysis?
+
+# What are RNNs?
+
+Simple multi-layered neural networks are classifiers which when given a certain input, tag the input as belonging to one of the many classes. They are trained using the existing backpropagation algorithms. These networks are great at what they do but they are not capable of handling inputs which come in a sequence. For example, for a neural net to identify the nouns in a sentence, having just the word as input is not helpful at all. A lot of information is present in the context of the word which can only be determined by looking at the words near the given word. The entire sequence is to be studied to determine the output. This is where Recurrent Neural Networks (RNNs) find their use. As the RNN traverses the input sequence, output for every input also becomes a part of the input for the next item of the sequence. 
+
+You can read more about the utility of RNNs in Andrej Karpathy’s brilliant blog post. (http://karpathy.github.io/2015/05/21/rnn-effectiveness/). 
+
+It is helpful to note the ‘recurrent’ property of the network, where the previous output for an input item becomes a part of the current input which comprises the current item in the sequence and the last output. When done over and over, the last output would be the result of all the previous inputs and the last input.
 
 # What is Sentiment Analysis
 
@@ -135,6 +150,9 @@ Then we simply add the input-, hidden- and output-layers. Between them, we are u
 
 At every layer, we use “Dense” which means that the units are fully connected. Within the hidden-layers, we use the relu function, because this is always a good start and yields a satisfactory result most of the time. Feel free to experiment with other activation functions. And at the output-layer, we use the sigmoid function, which maps the values between 0 and 1. Note that we set the input-shape to 10,000 at the input-layer, because our reviews are 10,000 integers long. The input-layer takes 10,000 as input and outputs it with a shape of 50.
 
+We start building our model architecture in the code cell below. I have imported some layers from Keras that you might need but feel free to use any other layers / transformations you like.
+
+Remember that the input is a sequence of words (technically, integer word IDs) of maximum length = max_review_length, and our output is a binary sentiment label (0 or 1).
 
 # Building the model
 
@@ -152,7 +170,6 @@ model.add(layers.Dense(50, activation = "relu"))
 ### Output- Layer
 model.add(Dense(1, activation='sigmoid'))
 print(model.summary()) 
-
 
 Let's go on detail on the two most important things in our model:
 
@@ -382,7 +399,7 @@ You can now use this model to also do binary sentiment analysis on other sources
 
 You can also apply this model to other related machine learning problems with only a few changes.
 
-# Sources and resources:
+# Sources, Resources and Inspirations:
 
 https://keras.io/datasets/
 
@@ -403,4 +420,12 @@ https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-le
 https://www.liip.ch/en/blog/sentiment-detection-with-keras-word-embeddings-and-lstm-deep-learning-networks
 
 https://github.com/keras-team/keras/blob/master/examples/imdb_cnn.py
+
+https://arxiv.org/ftp/arxiv/papers/1801/1801.07883.pdf
+
+http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+
+Best Algorithms for Sentiment Analysis: https://www.linkedin.com/pulse/best-ai-algorithms-sentiment-analysis-muktabh-mayank/
+
+Recurrent Neural Networks - Wikipedia - https://en.wikipedia.org/wiki/Recurrent_neural_network
 
