@@ -12,13 +12,37 @@ What is Sentiment Analysis?
 
 # What is Sentiment Analysis
 
+Sentiment analysis is a natural language processing problem where text is understood and the underlying intent is predicted.
+
 With Sentiment Analysis, we want to determine the attitude (e.g the sentiment) of for example a speaker or writer with respect to a document, interaction, or event. Therefore it is a natural language processing problem where text needs to be understood, to predict the underlying intent. The sentiment is mostly categorized into positive, negative and neutral categories. With the use of Sentiment Analysis, we want to predict for example a customers opinion and attitude about a product based on a review he wrote about it. Because of that, Sentiment Analysis is widely applied to things like reviews, surveys, documents and much more.
 
 # The imdb Dataset
 
-The imdb sentiment classification dataset consists of 50,000 movie reviews from imdb users that are labeled as either positive (1) or negative (0). The reviews are preprocessed and each one is encoded as a sequence of word indexes in the form of integers. The words within the reviews are indexed by their overall frequency within the dataset. For example, the integer “2” encodes the second most frequent word in the data. The 50,000 reviews are split into 25,000 for training and 25,000 for testing. The dataset was created by researchers of the Stanford University and published in a paper in 2011, where they achieved 88.89% accuracy. It was also used within the “Bag of Words Meets Bags of Popcorn” Kaggle competition in 2011.
+This dataset contains the movie reviews from IMDb along with their associated binary sentiment polarity labels.
+
+The imdb sentiment classification dataset consists of 50,000 movie reviews from imdb users that are labeled as either positive (1) or negative (0). The reviews are preprocessed and each one is encoded as a sequence of word indexes in the form of integers. The words within the reviews are indexed by their overall frequency within the dataset. For example, the integer “2” encodes the second most frequent word in the data. The 50,000 reviews are split into 25,000 for training and 25,000 for testing. 
+
+The dataset was created by researchers of the Stanford University and published in a paper in 2011, where they achieved 88.89% accuracy. It was also used within the “Bag of Words Meets Bags of Popcorn” Kaggle competition in 2011.
+
+You can use any method to classify the test data.
+
+Below is the original dataset we used for this competition. 
+
+http://ai.stanford.edu/~amaas/data/sentiment/
 
 # Importing the Dependencies and getting the Data
+
+Keras provides access to the IMDB dataset built-in.
+
+The keras.datasets.imdb.load_data() allows you to load the dataset in a format that is ready for use in neural network and deep learning models.
+
+The words have been replaced by integers that indicate the absolute popularity of the word in the dataset. The sentences in each review are therefore comprised of a sequence of integers.
+
+Calling imdb.load_data() the first time will download the IMDB dataset to your computer and store it in your home directory under ~/.keras/datasets/imdb.pkl as a 32 megabyte file.
+
+Usefully, the imdb.load_data() provides additional arguments including the number of top words to load (where words with a lower integer are marked as zero in the returned data), the number of top words to skip (to avoid the “the”‘s) and the maximum length of reviews to support.
+
+Let’s load the dataset and calculate some properties of it. We will start off by loading some libraries and loading the entire IMDB dataset as a training dataset.
 
 We start by importing the required dependencies to preprocess our data and to build our model.
 
@@ -189,4 +213,6 @@ https://en.wikipedia.org/wiki/Sentiment_analysis
 https://machinelearningmastery.com/introduction-python-deep-learning-library-keras/
 
 https://towardsdatascience.com/how-to-build-a-neural-network-with-keras-e8faa33d0ae4
+
+https://www.kaggle.com/c/word2vec-nlp-tutorial/data
 
