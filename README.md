@@ -216,6 +216,8 @@ Trainable params: 220,851
 Non-trainable params: 0
 _________________________________________________________________
 
+## Compiling the Model
+
 Now we need to compile our model, which is nothing but configuring the model for training. We use the efficient ADAM optimization procedure. The optimizer is the algorithm that changes the weights and biases during training. We also choose binary-crossentropy as loss (because we deal with binary classification) and accuracy as our evaluation metric.
 
 model.compile(
@@ -232,6 +234,13 @@ Again, there is a lot of opportunity for further optimization, such as the use o
 
 This is definitely problem dependent and you need to try out a few different values. If you start with a problem for the first time, I would you recommend to you to first use a batch-size of 32, which is the standard size.
 
+## Training the model
+After defining the model Keras gives us a summary of what we have built. It looks like this:
+
+(model_summary.jpg)
+
+And to train the model we simply call the fit function,supply it with the training data and also tell it which data it can use for validation. That is really useful because we have everything in one call.
+
 results = model.fit(
  train_x, train_y,
  epochs= 2,
@@ -239,11 +248,9 @@ results = model.fit(
  validation_data = (test_x, test_y)
 )
 
-Train on 40000 samples, validate on 10000 samples
-Epoch 1/2
-40000/40000 [==============================] - 16s 403us/step - loss: 0.3195 - acc: 0.8646 - val_loss: 0.2626 - val_acc: 0.8929
-Epoch 2/2
-40000/40000 [==============================] - 14s 347us/step - loss: 0.2004 - acc: 0.9215 - val_loss: 0.2760 - val_acc: 0.8925
+(model_training.jpg)
+
+The training of the model might take a while, especially when you are only running it on the CPU instead of the GPU. When the model training happens, what you want to observe is the loss function, it should constantly be going down, this shows that the model is improving. We will make the model see the dataset 3 times, defined by the epochs parameter. The batch size defines how many samples the model will see at once - in our case 64 reviews.
 
 To observe the training you can fire up tensor board which will run in the browser and give you a lot of different analytics, especially the loss curve in real time. To do so type in your console:
 
@@ -253,13 +260,13 @@ sudo tensorboard --logdir=/tmp
 
 Running this example fits the model and summarizes the estimated performance. We can see that this very simple model achieves a score of nearly 86.27% which is in the neighborhood of the original paper, with very little effort.
 
-#Print Accuracy of the model
+# Check the Accuracy of the model and save the model to the folder 
+Once we have finished training the model we can easily test its accuracy. Keras provides a very handy function to do that:
 
 from decimal import Decimal, ROUND_HALF_UP
 our_value = Decimal(np.mean(results.history["val_acc"])*100)
 output = Decimal(our_value.quantize(Decimal('.01'), rounding=ROUND_HALF_UP))
 
-# Save the model to the models folder
 model.save("models/trained_model.h5")
 print(" ")
 print("Model created, trained and save on the following folder: models/trained_model.h5 with " + str(output) +" % of accuracy.")
