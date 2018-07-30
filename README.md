@@ -3,7 +3,7 @@ A step by step mini-guide about how your first RNN and use it for Sentiment Anal
 
 # Intro
 
-
+Let me walk you through all of the steps needed to make a well working sentiment detection with Keras and long short-term memory networks. Keras is a very popular python deep learning library, similar to TFlearn that allows to create neural networks without writing too much boiler plate code. LSTM networks are a special form or network architecture especially useful for text tasks which I am going to explain later. 
 
 # What is Keras?
 
@@ -125,7 +125,9 @@ train_y = targets[10000:]
 
 We can now build our simple Neural Network. We start by defining the type of model we want to build. There are two types of models available in Keras: the Sequential model and the Model class used with functional API.
 
-Then we simply add the input-, hidden- and output-layers. Between them, we are using dropout to prevent overfitting. Note that you should always use a dropout rate between 20% and 50%. At every layer, we use “Dense” which means that the units are fully connected. Within the hidden-layers, we use the relu function, because this is always a good start and yields a satisfactory result most of the time. Feel free to experiment with other activation functions. And at the output-layer, we use the sigmoid function, which maps the values between 0 and 1. Note that we set the input-shape to 10,000 at the input-layer, because our reviews are 10,000 integers long. The input-layer takes 10,000 as input and outputs it with a shape of 50.
+Then we simply add the input-, hidden- and output-layers. Between them, we are using dropout to prevent overfitting. Note that you should always use a dropout rate between 20% and 50%. 
+
+At every layer, we use “Dense” which means that the units are fully connected. Within the hidden-layers, we use the relu function, because this is always a good start and yields a satisfactory result most of the time. Feel free to experiment with other activation functions. And at the output-layer, we use the sigmoid function, which maps the values between 0 and 1. Note that we set the input-shape to 10,000 at the input-layer, because our reviews are 10,000 integers long. The input-layer takes 10,000 as input and outputs it with a shape of 50.
 
 Lastly, we let Keras print a summary of the model we have just built.
 
@@ -163,7 +165,7 @@ Trainable params: 505,201
 Non-trainable params: 0
 _________________________________________________________________
 
-Now we need to compile our model, which is nothing but configuring the model for training. We use the “adam” optimizer. The optimizer is the algorithm that changes the weights and biases during training. We also choose binary-crossentropy as loss (because we deal with binary classification) and accuracy as our evaluation metric.
+Now we need to compile our model, which is nothing but configuring the model for training. We use the efficient ADAM optimization procedure. The optimizer is the algorithm that changes the weights and biases during training. We also choose binary-crossentropy as loss (because we deal with binary classification) and accuracy as our evaluation metric.
 
 model.compile(
  optimizer = "adam",
@@ -171,7 +173,13 @@ model.compile(
  metrics = ["accuracy"]
 )
 
-We are now able to train our model. We do this with a batch_size of 500 and only for two epochs because I recognized that the model overfits if we train it longer. The Batch size defines the number of samples that will be propagated through the network and an epoch is an iteration over the entire training data. In general a larger batch-size results in faster training, but don’t always converges fast. A smaller batch-size is slower in training but it can converge faster. This is definitely problem dependent and you need to try out a few different values. If you start with a problem for the first time, I would you recommend to you to first use a batch-size of 32, which is the standard size.
+We are now able to train our model. We do this with a batch_size of 32 and only for two epochs because the model can overfits if we train it longer. 
+
+The Batch size defines the number of samples that will be propagated through the network and an epoch is an iteration over the entire training data. In general a larger batch-size results in faster training, but don’t always converges fast. A smaller batch-size is slower in training but it can converge faster. 
+
+Again, there is a lot of opportunity for further optimization, such as the use of deeper and/or larger convolutional layers. One interesting idea is to set the max pooling layer to use an input length of 500. This would compress each feature map to a single 32 length vector and may boost performance
+
+This is definitely problem dependent and you need to try out a few different values. If you start with a problem for the first time, I would you recommend to you to first use a batch-size of 32, which is the standard size.
 
 results = model.fit(
  train_x, train_y,
@@ -190,6 +198,9 @@ Epoch 2/2
 It is time to save and evaluate our model:
 
 # Save the model to the models folder
+
+Running this example fits the model and summarizes the estimated performance. We can see that this very simple model achieves a score of nearly 86.27% which is in the neighborhood of the original paper, with very little effort.
+
 model.save("models/trained_model.h5")
 print(" ")
 print("Model created, trained and save on the following folder: models/trained_model.h5 with " + str(output) +" % of accuracy.")
@@ -198,7 +209,7 @@ print(" ")
 
 Model created, trained and save on the following folder: models/trained_model.h5 with 89.27 % of accuracy
 
-Awesome! With this simple model, we already beat the accuracy of the 2011 paper that I mentioned in the beginning. Feel free to experiment with the hyperparameters and the number of layers.
+I’m sure we can do better if we trained this network, perhaps using a larger embedding and adding more hidden layers. Let’s try a different network type. Feel free to experiment with the hyperparameters and the number of layers.
 
 Summary
 
@@ -215,4 +226,6 @@ https://machinelearningmastery.com/introduction-python-deep-learning-library-ker
 https://towardsdatascience.com/how-to-build-a-neural-network-with-keras-e8faa33d0ae4
 
 https://www.kaggle.com/c/word2vec-nlp-tutorial/data
+
+https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
 
