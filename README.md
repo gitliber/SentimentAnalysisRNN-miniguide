@@ -418,6 +418,6 @@ Recurrent Neural Networks - Wikipedia - https://en.wikipedia.org/wiki/Recurrent_
 
 # The Author
 
-<img src="images/LinkPhoto.jpeg">
+<img src="images/LinkePhoto.jpeg">
 Jair Ribeiro - A Senior IT manager specialized in Artificial Intelligence, Cloud Solutions, and Virtualization in Enterprise Environments with an extensive technical and multicultural background.
 LinkedIn Profile: https://www.linkedin.com/in/jairribeiro/
