@@ -347,6 +347,8 @@ my_gui = MyFirstGUI(root)
 root.mainloop()
 
 ## 3 - Using our model to predict a sentiment  - 03_Predict_with_the_model.py
+<img src="images/model_predicting.jpeg">
+
 Of course at the end we want to use our model in an application. So we want to use it to create predictions. In order to do so we need to translate our sentence into the corresponding word integers and then pad it to match our data. We can then feed it into our model and see if how it thinks we liked or disliked the movie.
 
 
