@@ -30,6 +30,8 @@ It is helpful to note the ‘recurrent’ property of the network, where the pre
 
 # What is Sentiment Analysis
 
+<img src="images/sentiment-analysis-domains.jpeg">
+
 Sentiment analysis is a natural language processing problem where text is understood and the underlying intent is predicted.
 
 With Sentiment Analysis, we want to determine the attitude (e.g the sentiment) of for example a speaker or writer with respect to a document, interaction, or event. Therefore it is a natural language processing problem where text needs to be understood, to predict the underlying intent. The sentiment is mostly categorized into positive, negative and neutral categories. With the use of Sentiment Analysis, we want to predict for example a customers opinion and attitude about a product based on a review he wrote about it. Because of that, Sentiment Analysis is widely applied to things like reviews, surveys, documents and much more.
@@ -214,27 +216,7 @@ model.add(Flatten())
 
 Lastly, we let Keras print a summary of the model we have just built.
 
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-embedding_1 (Embedding)      (None, 5000, 32)          160000    
-_________________________________________________________________
-lstm_1 (LSTM)                (None, 100)               53200     
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 100)               0         
-_________________________________________________________________
-dense_1 (Dense)              (None, 50)                5050      
-_________________________________________________________________
-dropout_2 (Dropout)          (None, 50)                0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 50)                2550      
-_________________________________________________________________
-dense_3 (Dense)              (None, 1)                 51        
-=================================================================
-Total params: 220,851
-Trainable params: 220,851
-Non-trainable params: 0
-_________________________________________________________________
+<img src="images/model_summary.jpeg">
 
 ## Compiling the Model
 
@@ -257,7 +239,7 @@ This is definitely problem dependent and you need to try out a few different val
 ## Training the model
 After defining the model Keras gives us a summary of what we have built. It looks like this:
 
-(model_summary.jpg)
+<img src="images/model_summary.jpeg">
 
 And to train the model we simply call the fit function,supply it with the training data and also tell it which data it can use for validation. That is really useful because we have everything in one call.
 
