@@ -290,8 +290,7 @@ class MyFirstGUI:
         self.master = master
         master.title("Neural Network Lesson by Jair Ribeiro")
 
-        self.label = Label(master, text="Sentiment Analysis with Keras")
-##        self.label = Label(master, text="Current Model Accuracy: " + str(output) +" %")        
+        self.label = Label(master, text="Sentiment Analysis with Keras")        
         self.label.pack()
 
         # Checking the data 
