@@ -388,29 +388,29 @@ You can also apply this model to other related machine learning problems with on
 
 # Sources, Resources and Inspirations:
 
-https://keras.io/datasets/
+Datasets Keras - https://keras.io/datasets/
 
-https://keras.rstudio.com/reference/dataset_imdb.html
+Keras IMDB Dataset reference - https://keras.rstudio.com/reference/dataset_imdb.html
 
-https://en.wikipedia.org/wiki/Sentiment_analysis
+Wikipedia: Sentiment Analysis - https://en.wikipedia.org/wiki/Sentiment_analysis
 
-https://machinelearningmastery.com/introduction-python-deep-learning-library-keras/
+Introduction to Deep Learning with Python and Keras - https://machinelearningmastery.com/introduction-python-deep-learning-library-keras/
 
-https://towardsdatascience.com/how-to-build-a-neural-network-with-keras-e8faa33d0ae4
+How to build a neural network with Keras - https://towardsdatascience.com/how-to-build-a-neural-network-with-keras-e8faa33d0ae4
 
-https://www.kaggle.com/c/word2vec-nlp-tutorial/data
+Kaggle Word2vec NLP - https://www.kaggle.com/c/word2vec-nlp-tutorial/data
 
-https://github.com/wendykan/DeepLearningMovies
+Deep Learning Movies - https://github.com/wendykan/DeepLearningMovies
 
-https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
+Predict Sentiment movie reviews using Deep Learning - https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
 
-https://www.liip.ch/en/blog/sentiment-detection-with-keras-word-embeddings-and-lstm-deep-learning-networks
+Sentiment Detection with Keras - https://www.liip.ch/en/blog/sentiment-detection-with-keras-word-embeddings-and-lstm-deep-learning-networks
 
-https://github.com/keras-team/keras/blob/master/examples/imdb_cnn.py
+Keras Team GitHub - https://github.com/keras-team/keras/blob/master/examples/imdb_cnn.py
 
-https://arxiv.org/ftp/arxiv/papers/1801/1801.07883.pdf
+Sentiment Analysis Paper - https://arxiv.org/ftp/arxiv/papers/1801/1801.07883.pdf
 
-http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+RNN Effectiveness - http://karpathy.github.io/2015/05/21/rnn-effectiveness/
 
 Best Algorithms for Sentiment Analysis: https://www.linkedin.com/pulse/best-ai-algorithms-sentiment-analysis-muktabh-mayank/
 
