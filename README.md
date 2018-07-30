@@ -30,7 +30,7 @@ Below is the original dataset we used for this competition.
 
 http://ai.stanford.edu/~amaas/data/sentiment/
 
-## 1 - Importing the Dependencies and getting the Data
+## 1 - Importing the Dependencies and getting the Data - 01_Train_the_model.py
 
 Fortunately Keras provides access to the IMDB dataset built-in. The IMDB sample comes already with the Keras datasets library, so you don't have to download anything.
 
@@ -133,6 +133,44 @@ Then we simply add the input-, hidden- and output-layers. Between them, we are u
 
 At every layer, we use “Dense” which means that the units are fully connected. Within the hidden-layers, we use the relu function, because this is always a good start and yields a satisfactory result most of the time. Feel free to experiment with other activation functions. And at the output-layer, we use the sigmoid function, which maps the values between 0 and 1. Note that we set the input-shape to 10,000 at the input-layer, because our reviews are 10,000 integers long. The input-layer takes 10,000 as input and outputs it with a shape of 50.
 
+
+The two most important things in our code are the following:
+
+    The Embedding layer and
+    The LSTM Layer.
+
+Lets cover what both are doing.
+Word embeddings
+
+The embedding layer will learn a word embedding for all the words in the dataset. It has three arguments the input_dimension in our case the 500 words. The output dimension aka the vector space in which words will be embedded. In our case we have chosen 32 dimensions so a vector of the length of 32 to hold our word coordinates.
+
+There are already pre-trained word embeddings (e.g. GloVE or Word2Vec) that you can download so that you don't have to train your embeddings all by yourself. Generally, these word embeddings are also based on specialized algorithms that do the embedding always a bit different, but we won't cover it here.
+
+How can you imagine what an embedding actually is? Well generally words that have a similar meaning in the context should be embedded next to each other. Below is an example of word embeddings in a two-dimensional space:
+embeddings
+
+Why should we even care about word embeddings? Because it is a really useful trick. If we were to feed our reviews into a neural network and just one-hot encode them we would have very sparse representations of our texts. Why? Let us have a look at the sentence "I do my job" in "bag of words" representation with a vocabulary of 1000: So a matrix that holds 1000 words (each column is one word), has four ones in it (one for I, one for do one for my and one for job) and 996 zeros. So it would be very sparse. This means that learning from it would be difficult, because we would need 1000 input neurons each representing the occurrence of a word in our sentence.
+
+In contrast if we do a word embedding we can fold these 1000 words in just as many dimensions as we want, in our case 32. This means that we just have an input vector of 32 values instead of 1000. So the word "I" would be some vector with values (0.4,0.5,0.2,...) and the same would happen with the other words. With word embedding like this, we just need 32 input neurons.
+LSTMs
+
+Recurrent neural networks are networks that are used for "things" that happen recurrently so one thing after the other (e.g. time series, but also words). Long Short-Term Memory networks (LSTM) are a specific type of Recurrent Neural Network (RNN) that are capable of learning the relationships between elements in an input sequence. In our case the elements are words. So our next layer is an LSTM layer with 100 memory units.
+
+LSTM networks maintain a state, and so overcome the problem of a vanishing gradient problem in recurrent neural networks (basically the problem that when you make a network deep enough the information for learning will "vanish" at some point). I do not want to go into detail how they actually work, but here delivers a great visual explanation. Below is a schematic overview over the building blocks of LSTMs.
+
+So our output of the embedding layer is a 500 times 32 matrix. Each word is represented through its position in those 32 dimensions. And the sequence is the 500 words that we feed into the LSTM network.
+
+Finally at the end we have a dense layer with one node with a sigmoid activation as the output.
+
+Since we are going to have only the decision when the review is positive or negative we will use binary_crossentropy for the loss function. The optimizer is the standard one (adam) and the metrics are also the standard accuracy metric.
+
+By the way, if you want you can build a sentiment analysis without LSTMs, then you simply need to replace it by a flatten layer:
+
+#Replace LSTM by a flatten layer
+#model.add(LSTM(100)) 
+model.add(Flatten()) 
+
+
 Lastly, we let Keras print a summary of the model we have just built.
 
 # Input - Layer
@@ -197,25 +235,42 @@ Epoch 1/2
 40000/40000 [==============================] - 16s 403us/step - loss: 0.3195 - acc: 0.8646 - val_loss: 0.2626 - val_acc: 0.8929
 Epoch 2/2
 40000/40000 [==============================] - 14s 347us/step - loss: 0.2004 - acc: 0.9215 - val_loss: 0.2760 - val_acc: 0.8925
- 
 
-It is time to save and evaluate our model:
+To observe the training you can fire up tensor board which will run in the browser and give you a lot of different analytics, especially the loss curve in real time. To do so type in your console:
+
+sudo tensorboard --logdir=/tmp
 
 # Save the model to the models folder
 
 Running this example fits the model and summarizes the estimated performance. We can see that this very simple model achieves a score of nearly 86.27% which is in the neighborhood of the original paper, with very little effort.
 
+#Print Accuracy of the model
+
+from decimal import Decimal, ROUND_HALF_UP
+our_value = Decimal(np.mean(results.history["val_acc"])*100)
+output = Decimal(our_value.quantize(Decimal('.01'), rounding=ROUND_HALF_UP))
+
+# Save the model to the models folder
 model.save("models/trained_model.h5")
 print(" ")
 print("Model created, trained and save on the following folder: models/trained_model.h5 with " + str(output) +" % of accuracy.")
 print(" ")
 print(" ")
 
-Model created, trained and save on the following folder: models/trained_model.h5 with 89.27 % of accuracy
+"Model created, trained and save on the following folder: models/trained_model.h5 with 89.27 % of accuracy"
 
 I’m sure we can do better if we trained this network, perhaps using a larger embedding and adding more hidden layers. Let’s try a different network type. Feel free to experiment with the hyperparameters and the number of layers.
 
-Summary
+
+
+
+## 2 - Testing our model - 02_Test_the_model.py
+
+It is time to save and evaluate our model:
+
+
+
+# Summary
 
 In this Post you learned what Sentiment Analysis is and why Keras is one of the most used Deep Learning libraries. On top of that you learned that Keras made a big contribution to the commoditization of deep learning and artificial intelligence. You learned how to build a simple Neural Network with six layers that can predict the sentiment of movie reviews, which achieves a 89% accuracy. You can now use this model to also do binary sentiment analysis on other sources of text but you need to change them all to a length of 10,000 or you change the input-shape of the input layer. You can also apply this model to other related machine learning problems with only a few changes.
 
@@ -236,4 +291,6 @@ https://www.kaggle.com/c/word2vec-nlp-tutorial/data
 https://github.com/wendykan/DeepLearningMovies
 
 https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
+
+https://www.liip.ch/en/blog/sentiment-detection-with-keras-word-embeddings-and-lstm-deep-learning-networks
 
