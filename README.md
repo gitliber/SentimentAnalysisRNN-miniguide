@@ -30,9 +30,9 @@ Below is the original dataset we used for this competition.
 
 http://ai.stanford.edu/~amaas/data/sentiment/
 
-# Importing the Dependencies and getting the Data
+## 1 - Importing the Dependencies and getting the Data
 
-Keras provides access to the IMDB dataset built-in.
+Fortunately Keras provides access to the IMDB dataset built-in. The IMDB sample comes already with the Keras datasets library, so you don't have to download anything.
 
 The keras.datasets.imdb.load_data() allows you to load the dataset in a format that is ready for use in neural network and deep learning models.
 
@@ -62,7 +62,7 @@ from keras.datasets import imdb
 data = np.concatenate((training_data, testing_data), axis=0)
 targets = np.concatenate((training_targets, testing_targets), axis=0)
 
-# Exploring the Data
+## 2 - Exploring the Data
 
 Now we can start exploring the dataset:
 
@@ -81,6 +81,8 @@ Standard Deviation: 173.0
 
 You can see in the output above that the dataset is labeled into two categories, either 0 or 1, which represents the sentiment of the review. The whole dataset contains 9998 unique words and the average review length is 234 words, with a standard deviation of 173 words.
 
+If you look at the data you will realize it has been already pre-processed. All words have been mapped to integers and the integers represent the words sorted by their frequency. This is very common in text analysis to represent a dataset like this. So 4 represents the 4th most used word, 5 the 5th most used word and so on... The integer 1 is reserved for the start marker, the integer 2 for an unknown word and 0 for padding. 
+
 Now we will look at a single training example:
 
 print("Label:", targets[0])
@@ -92,6 +94,8 @@ print(data[0])
 [1, 14, 22, 16, 43, 530, 973, 1622, 1385, 65, 458, 4468, 66, 3941, 4, 173, 36, 256, 5, 25, 100, 43, 838, 112, 50, 670, 2, 9, 35, 480, 284, 5, 150, 4, 172, 112, 167, 2, 336, 385, 39, 4, 172, 4536, 1111, 17, 546, 38, 13, 447, 4, 192, 50, 16, 6, 147, 2025, 19, 14, 22, 4, 1920, 4613, 469, 4, 22, 71, 87, 12, 16, 43, 530, 38, 76, 15, 13, 1247, 4, 22, 17, 515, 17, 12, 16, 626, 18, 2, 5, 62, 386, 12, 8, 316, 8, 106, 5, 4, 2223, 5244, 16, 480, 66, 3785, 33, 4, 130, 12, 16, 38, 619, 5, 25, 124, 51, 36, 135, 48, 25, 1415, 33, 6, 22, 12, 215, 28, 77, 52, 5, 14, 407, 16, 82, 2, 8, 4, 107, 117, 5952, 15, 256, 4, 2, 7, 3766, 5, 723, 36, 71, 43, 530, 476, 26, 400, 317, 46, 7, 4, 2, 1029, 13, 104, 88, 4, 381, 15, 297, 98, 32, 2071, 56, 26, 141, 6, 194, 7486, 18, 4, 226, 22, 21, 134, 476, 26, 480, 5, 144, 30, 5535, 18, 51, 36, 28, 224, 92, 25, 104, 4, 226, 65, 16, 38, 1334, 88, 12, 16, 283, 5, 16, 4472, 113, 103, 32, 15, 16, 5345, 19, 178, 32]
 
 Above you see the first review of the dataset which is labeled as positive (1). The code below retrieves the dictionary mapping word indices back into the original words so that we can read them. It replaces every unknown word with a “#”. It does this by using the get_word_index() function.
+
+If you want to peek at the reviews yourself and see what people have actually written, you can reverse the process too:
 
 index = imdb.get_word_index()
 reverse_index = dict([(value, key) for (key, value) in index.items()]) 
@@ -219,6 +223,8 @@ In this Post you learned what Sentiment Analysis is and why Keras is one of the 
 
 https://keras.io/datasets/
 
+https://keras.rstudio.com/reference/dataset_imdb.html
+
 https://en.wikipedia.org/wiki/Sentiment_analysis
 
 https://machinelearningmastery.com/introduction-python-deep-learning-library-keras/
@@ -226,6 +232,8 @@ https://machinelearningmastery.com/introduction-python-deep-learning-library-ker
 https://towardsdatascience.com/how-to-build-a-neural-network-with-keras-e8faa33d0ae4
 
 https://www.kaggle.com/c/word2vec-nlp-tutorial/data
+
+https://github.com/wendykan/DeepLearningMovies
 
 https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
 
