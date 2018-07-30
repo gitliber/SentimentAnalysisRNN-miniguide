@@ -7,7 +7,9 @@ Let me walk you through all of the steps needed to make a well working sentiment
 
 # What is Keras?
 
-Keras is an open source python library that enables you to easily build Neural Networks. The library is capable of running on top of TensorFlow, Microsoft Cognitive Toolkit, Theano, and MXNet. Tensorflow and Theano are the most used numerical platforms in Python to build Deep Learning algorithms but they can be quite complex and difficult to use. In comparison, Keras provides an easy and convenient way to build deep learning models. It’s creator François Chollet developed it to enable people to build Neural Networks as fast and easy as possible. He laid his focus on extensibility, modularity, minimalism and the support of python. Keras can be used with GPUs and CPUs and it supports both Python 2 and 3. Google Keras made a big contribution to the commoditization of deep learning and artificial intelligence since it has commoditized powerful, modern Deep Learning algorithms that previously were not only inaccessible but also unusable as well.
+Keras is an open source python library that enables you to easily build Neural Networks. The library is capable of running on top of TensorFlow, Microsoft Cognitive Toolkit, Theano, and MXNet. Tensorflow and Theano are the most used numerical platforms in Python to build Deep Learning algorithms but they can be quite complex and difficult to use. In comparison, Keras provides an easy and convenient way to build deep learning models. It’s creator François Chollet developed it to enable people to build Neural Networks as fast and easy as possible. He laid his focus on extensibility, modularity, minimalism and the support of python. Keras can be used with GPUs and CPUs and it supports both Python 2 and 3. 
+
+Google Keras made a big contribution to the commoditization of deep learning and artificial intelligence since it has commoditized powerful, modern Deep Learning algorithms that previously were not only inaccessible but also unusable as well.
 What is Sentiment Analysis?
 
 # What is Sentiment Analysis
@@ -258,7 +260,7 @@ sudo tensorboard --logdir=/tmp
 
 # Save the model to the models folder
 
-Running this example fits the model and summarizes the estimated performance. We can see that this very simple model achieves a score of nearly 86.27% which is in the neighborhood of the original paper, with very little effort.
+Running this example fits the model and summarizes the estimated performance. We can see that this very simple model achieves a score of nearly 90% with very little effort.
 
 # Check the Accuracy of the model and save the model to the folder 
 Once we have finished training the model we can easily test its accuracy. Keras provides a very handy function to do that:
