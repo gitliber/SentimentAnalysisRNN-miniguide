@@ -416,3 +416,8 @@ Best Algorithms for Sentiment Analysis: https://www.linkedin.com/pulse/best-ai-a
 
 Recurrent Neural Networks - Wikipedia - https://en.wikipedia.org/wiki/Recurrent_neural_network
 
+# The Author
+
+<img src="images/LinkPhoto.jpeg">
+Jair Ribeiro - A Senior IT manager specialized in Artificial Intelligence, Cloud Solutions, and Virtualization in Enterprise Environments with an extensive technical and multicultural background.
+LinkedIn Profile: https://www.linkedin.com/in/jairribeiro/
