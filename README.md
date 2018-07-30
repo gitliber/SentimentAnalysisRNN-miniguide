@@ -250,7 +250,7 @@ results = model.fit(
  validation_data = (test_x, test_y)
 )
 
-(model_training.jpg)
+<img src="images/model_training.jpeg">
 
 The training of the model might take a while, especially when you are only running it on the CPU instead of the GPU. When the model training happens, what you want to observe is the loss function, it should constantly be going down, this shows that the model is improving. We will make the model see the dataset 3 times, defined by the epochs parameter. The batch size defines how many samples the model will see at once - in our case 64 reviews.
 
