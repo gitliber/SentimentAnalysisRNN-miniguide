@@ -1,29 +1,24 @@
 # SentimentAnalysisRNN-miniguide
 A step by step mini-guide about how your first RNN and use it for Sentiment Analysis
 
-Keras is one of the most popular Deep Learning libraries out there at the moment and made a big contribution to the commoditization of artificial intelligence. It is simple to use and it enables you to build powerful Neural Networks in just a few lines of code. In this post, you will discover how you can build a Neural Network with Keras that predicts the sentiment of user reviews by categorizing them into two categories: positive or negative. This is called Sentiment Analysis and we will do it with the famous imdb review dataset. The model we will build can also be applied to other Machine Learning problems with just a few changes.
+# Intro
 
-Note that we will not go into the details of Keras or Deep Learning. This post is intended to provide you with a blueprint of a Keras Neural Network and to make you familiar with its implementation.
-Table of Contents:
 
-    What is Keras?
-    What is Sentiment Analysis?
-    The imdb Dataset
-    Import Dependencies and get the Data
-    Exploring the Data
-    Data Preparation
-    Building and Training the Model
 
-What is Keras?
+# What is Keras?
 
 Keras is an open source python library that enables you to easily build Neural Networks. The library is capable of running on top of TensorFlow, Microsoft Cognitive Toolkit, Theano, and MXNet. Tensorflow and Theano are the most used numerical platforms in Python to build Deep Learning algorithms but they can be quite complex and difficult to use. In comparison, Keras provides an easy and convenient way to build deep learning models. It’s creator François Chollet developed it to enable people to build Neural Networks as fast and easy as possible. He laid his focus on extensibility, modularity, minimalism and the support of python. Keras can be used with GPUs and CPUs and it supports both Python 2 and 3. Google Keras made a big contribution to the commoditization of deep learning and artificial intelligence since it has commoditized powerful, modern Deep Learning algorithms that previously were not only inaccessible but also unusable as well.
 What is Sentiment Analysis?
 
+# What is Sentiment Analysis
+
 With Sentiment Analysis, we want to determine the attitude (e.g the sentiment) of for example a speaker or writer with respect to a document, interaction, or event. Therefore it is a natural language processing problem where text needs to be understood, to predict the underlying intent. The sentiment is mostly categorized into positive, negative and neutral categories. With the use of Sentiment Analysis, we want to predict for example a customers opinion and attitude about a product based on a review he wrote about it. Because of that, Sentiment Analysis is widely applied to things like reviews, surveys, documents and much more.
-The imdb Dataset
+
+# The imdb Dataset
 
 The imdb sentiment classification dataset consists of 50,000 movie reviews from imdb users that are labeled as either positive (1) or negative (0). The reviews are preprocessed and each one is encoded as a sequence of word indexes in the form of integers. The words within the reviews are indexed by their overall frequency within the dataset. For example, the integer “2” encodes the second most frequent word in the data. The 50,000 reviews are split into 25,000 for training and 25,000 for testing. The dataset was created by researchers of the Stanford University and published in a paper in 2011, where they achieved 88.89% accuracy. It was also used within the “Bag of Words Meets Bags of Popcorn” Kaggle competition in 2011.
-Import Dependencies and get the Data
+
+# Importing the Dependencies and getting the Data
 
 We start by importing the required dependencies to preprocess our data and to build our model.
 
@@ -43,7 +38,7 @@ from keras.datasets import imdb
 data = np.concatenate((training_data, testing_data), axis=0)
 targets = np.concatenate((training_targets, testing_targets), axis=0)
 
-Exploring the Data
+# Exploring the Data
 
 Now we can start exploring the dataset:
 
@@ -79,9 +74,9 @@ reverse_index = dict([(value, key) for (key, value) in index.items()])
 decoded = " ".join( [reverse_index.get(i - 3, "#") for i in data[0]] )
 print(decoded) 
 
-# this film was just brilliant casting location scenery story direction everyone's really suited the part they played and you could just imagine being there robert # is an amazing actor and now the same being director # father came from the same scottish island as myself so i loved the fact there was a real connection with this film the witty remarks throughout the film were great it was just brilliant so much that i bought the film as soon as it was released for # and would recommend it to everyone to watch and the fly fishing was amazing really cried at the end it was so sad and you know what they say if you cry at a film it must have been good and this definitely was also # to the two little boy's that played the # of norman and paul they were just brilliant children are often left out of the # list i think because the stars that play them all grown up are such a big profile for the whole film but these children are amazing and should be praised for what they have done don't you think the whole story was so lovely because it was true and was someone's life after all that was shared with us all
+this film was just brilliant casting location scenery story direction everyone's really suited the part they played and you could just imagine being there robert # is an amazing actor and now the same being director # father came from the same scottish island as myself so i loved the fact there was a real connection with this film the witty remarks throughout the film were great it was just brilliant so much that i bought the film as soon as it was released for # and would recommend it to everyone to watch and the fly fishing was amazing really cried at the end it was so sad and you know what they say if you cry at a film it must have been good and this definitely was also # to the two little boy's that played the # of norman and paul they were just brilliant children are often left out of the # list i think because the stars that play them all grown up are such a big profile for the whole film but these children are amazing and should be praised for what they have done don't you think the whole story was so lovely because it was true and was someone's life after all that was shared with us all
 
-Data Preparation
+# Preparing the data
 
 Now it is time to prepare our data. We will vectorize every review and fill it with zeros so that it contains exactly 10,000 numbers. That means we fill every review that is shorter than 10,000 with zeros. We do this because the biggest review is nearly that long and every input for our neural network needs to have the same size. We also transform the targets into floats.
 
@@ -102,7 +97,7 @@ test_y = targets[:10000]
 train_x = data[10000:]
 train_y = targets[10000:]
 
-Building and Training the Model
+# Building and Training the Model
 
 We can now build our simple Neural Network. We start by defining the type of model we want to build. There are two types of models available in Keras: the Sequential model and the Model class used with functional API.
 
@@ -157,84 +152,41 @@ We are now able to train our model. We do this with a batch_size of 500 and only
 results = model.fit(
  train_x, train_y,
  epochs= 2,
- batch_size = 500,
+ batch_size = 32,
  validation_data = (test_x, test_y)
 )
 
 Train on 40000 samples, validate on 10000 samples
 Epoch 1/2
-40000/40000 [==============================] - 5s 129us/step - loss: 0.4051 - acc: 0.8212 - val_loss: 0.2635 - val_acc: 0.8945
+40000/40000 [==============================] - 16s 403us/step - loss: 0.3195 - acc: 0.8646 - val_loss: 0.2626 - val_acc: 0.8929
 Epoch 2/2
-40000/40000 [==============================] - 4s 90us/step - loss: 0.2122 - acc: 0.9190 - val_loss: 0.2598 - val_acc: 0.8950
+40000/40000 [==============================] - 14s 347us/step - loss: 0.2004 - acc: 0.9215 - val_loss: 0.2760 - val_acc: 0.8925
+ 
 
-It is time to evaluate our model:
+It is time to save and evaluate our model:
 
-print(np.mean(results.history["val_acc"]))
+# Save the model to the models folder
+model.save("models/trained_model.h5")
+print(" ")
+print("Model created, trained and save on the following folder: models/trained_model.h5 with " + str(output) +" % of accuracy.")
+print(" ")
+print(" ")
 
-0.894750000536
+Model created, trained and save on the following folder: models/trained_model.h5 with 89.27 % of accuracy
 
 Awesome! With this simple model, we already beat the accuracy of the 2011 paper that I mentioned in the beginning. Feel free to experiment with the hyperparameters and the number of layers.
-
-You can see the code for the whole model below:
-
-import numpy as np
-from keras.utils import to_categorical
-from keras import models
-from keras import layers
-from keras.datasets import imdb
-
-(training_data, training_targets), (testing_data, testing_targets) = imdb.load_data(num_words=10000)
-
-data = np.concatenate((training_data, testing_data), axis=0)
-
-targets = np.concatenate((training_targets, testing_targets), axis=0)
-
-def vectorize(sequences, dimension = 10000):
- results = np.zeros((len(sequences), dimension))
- for i, sequence in enumerate(sequences):
-  results[i, sequence] = 1
- return results
- 
-data = vectorize(data)
-targets = np.array(targets).astype("float32")
-
-test_x = data[:10000]
-test_y = targets[:10000]
-train_x = data[10000:]
-train_y = targets[10000:]
-
-model = models.Sequential()
-# Input - Layer
-model.add(layers.Dense(50, activation = "relu", input_shape=(10000, )))
-# Hidden - Layers
-model.add(layers.Dropout(0.3, noise_shape=None, seed=None))
-model.add(layers.Dense(50, activation = "relu"))
-model.add(layers.Dropout(0.2, noise_shape=None, seed=None))
-model.add(layers.Dense(50, activation = "relu"))
-# Output- Layer
-model.add(layers.Dense(1, activation = "sigmoid"))
-model.summary()
-# compiling the model
-model.compile(
- optimizer = "adam",
- loss = "binary_crossentropy",
- metrics = ["accuracy"]
-)
-results = model.fit(
- train_x, train_y,
- epochs= 2,
- batch_size = 500,
- validation_data = (test_x, test_y)
-)
-print("Test-Accuracy:", np.mean(results.history["val_acc"]))
 
 Summary
 
 In this Post you learned what Sentiment Analysis is and why Keras is one of the most used Deep Learning libraries. On top of that you learned that Keras made a big contribution to the commoditization of deep learning and artificial intelligence. You learned how to build a simple Neural Network with six layers that can predict the sentiment of movie reviews, which achieves a 89% accuracy. You can now use this model to also do binary sentiment analysis on other sources of text but you need to change them all to a length of 10,000 or you change the input-shape of the input layer. You can also apply this model to other related machine learning problems with only a few changes.
-Sources:
+
+# Sources and resources:
 
 https://keras.io/datasets/
 
 https://en.wikipedia.org/wiki/Sentiment_analysis
 
 https://machinelearningmastery.com/introduction-python-deep-learning-library-keras/
+
+https://towardsdatascience.com/how-to-build-a-neural-network-with-keras-e8faa33d0ae4
+
