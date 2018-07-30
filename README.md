@@ -177,7 +177,7 @@ Recurrent neural networks (RNN) are networks that are used for "things" that hap
 
 Long Short-Term Memory networks (LSTM) are a specific type of Recurrent Neural Network (RNN) that are capable of learning the relationships between elements in an input sequence. In our case the elements are words. So our next layer is an LSTM layer with 100 memory units.
 
-/*LSTM networks maintain a state, and so overcome the problem of a vanishing gradient problem in recurrent neural networks (basically the problem that when you make a network deep enough the information for learning will "vanish" at some point). I do not want to go into detail how they actually work, but here delivers a great visual explanation. Below is a schematic overview over the building blocks of LSTMs.
+LSTM networks maintain a state, and so overcome the problem of a vanishing gradient problem in recurrent neural networks (basically the problem that when you make a network deep enough the information for learning will "vanish" at some point). I do not want to go into detail how they actually work, but here delivers a great visual explanation. Below is a schematic overview over the building blocks of LSTMs.
 
 So our output of the embedding layer is a 500 times 32 matrix. Each word is represented through its position in those 32 dimensions. And the sequence is the 500 words that we feed into the LSTM network.
 
@@ -194,37 +194,25 @@ model.add(Flatten())
 
 Lastly, we let Keras print a summary of the model we have just built.
 
-# Input - Layer
-model.add(layers.Dense(50, activation = "relu", input_shape=(10000, )))
-
-# Hidden - Layers
-model.add(layers.Dropout(0.3, noise_shape=None, seed=None))
-model.add(layers.Dense(50, activation = "relu")
-model.add(layers.Dropout(0.2, noise_shape=None, seed=None))
-model.add(layers.Dense(50, activation = "relu"))
-
-# Output- Layer
-model.add(layers.Dense(1, activation = "sigmoid"))model.summary()
-
-model.summary()
-
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-dense_1 (Dense)              (None, 50)                500050    
+embedding_1 (Embedding)      (None, 5000, 32)          160000    
 _________________________________________________________________
-dropout_1 (Dropout)          (None, 50)                0         
+lstm_1 (LSTM)                (None, 100)               53200     
 _________________________________________________________________
-dense_2 (Dense)              (None, 50)                2550      
+dropout_1 (Dropout)          (None, 100)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 50)                5050      
 _________________________________________________________________
 dropout_2 (Dropout)          (None, 50)                0         
 _________________________________________________________________
-dense_3 (Dense)              (None, 50)                2550      
+dense_2 (Dense)              (None, 50)                2550      
 _________________________________________________________________
-dense_4 (Dense)              (None, 1)                 51        
+dense_3 (Dense)              (None, 1)                 51        
 =================================================================
-Total params: 505,201
-Trainable params: 505,201
+Total params: 220,851
+Trainable params: 220,851
 Non-trainable params: 0
 _________________________________________________________________
 
