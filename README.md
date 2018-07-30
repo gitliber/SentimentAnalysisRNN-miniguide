@@ -281,6 +281,8 @@ I’m sure we can do better if we trained this network, perhaps using a larger e
 
 ## 2 - Summarizing  our model - 02_Test_the_model.py
 
+<img src="images/model_test_summary.jpeg">
+
 It is time to summarize all the most relevant informations regarding our just trained model. To do this I created a separated .py which display a summary on a dedicated screen:
 
 ## Create the screen using tkinter
