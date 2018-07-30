@@ -280,15 +280,101 @@ I’m sure we can do better if we trained this network, perhaps using a larger e
 
 
 
-## 2 - Testing our model - 02_Test_the_model.py
+## 2 - Summarizing  our model - 02_Test_the_model.py
 
-It is time to save and evaluate our model:
+It is time to summarize all the most relevant informations regarding our just trained model. To do this I created a separated .py which display a summary on a dedicated screen:
 
+## Create the screen using tkinter
 
+from tkinter import Tk, Label, Button, Message
+class MyFirstGUI:
+    def __init__(self, master):
+        master.geometry("700x600")
+        self.master = master
+        master.title("Neural Network Lesson by Jair Ribeiro")
+
+        self.label = Label(master, text="Sentiment Analysis with Keras")
+##        self.label = Label(master, text="Current Model Accuracy: " + str(output) +" %")        
+        self.label.pack()
+
+        # Checking the data 
+        ReviewNumber= random.randint(1, 1000)
+        index = imdb.get_word_index()
+        reverse_index = dict([(value, key) for (key, value) in index.items()]) 
+        decoded = " ".join( [reverse_index.get(i - ReviewNumber, "#") for i in data[0]] )
+
+        self.label = Label(master, text="Analyzing randomly the Review n. " + str(ReviewNumber) + " from IMDB")
+        self.label.pack()
+
+        self.label = Label(master, text="Unknown words were replaced with #")
+        self.label.pack()
+        
+        self.message = Message(master, text=" " + str(decoded))
+        self.message.pack()
+
+        # Exploring the data
+        self.label = Label(master, text="Exploring the data")
+        self.label.pack()
+        self.label = Label(master, text="Categories: " + str(np.unique(targets)))
+        self.label.pack()       
+
+        Sentiment = "Positive" if targets[0] > 0 else "Negative"
+        self.label = Label(master, text="Sentiment Analysis: " + Sentiment + " (" + str(targets[0])+ ").")
+        self.label.pack()
+ 
+        self.label = Label(master, text="Analyzing the data.")
+        self.label.pack()    
+
+        self.label = Label(master, text="Number of unique words: " + str(len(np.unique(np.hstack(data))))+".")
+        self.label.pack()
+        
+        self.label = Label(master, text="Averages")
+        self.label.pack()
+
+        length = [len(i) for i in data]
+        self.label = Label(master, text="Average Review length: " + str("%6.0f" % np.mean(length))+" words.")
+        self.label.pack()
+        
+        self.label = Label(master, text="Standard Deviation: " + str("%6.0f" % round(np.std(length)))+" words.")
+        self.label.pack()
+
+        # Close Button
+        self.close_button = Button(master, text="Close", command=master.quit)
+        self.close_button.pack()
+
+root = Tk()
+my_gui = MyFirstGUI(root)
+root.mainloop()
+
+## 3 - Using our model to predict a sentiment  - 03_Predict_with_the_model.py
+Of course at the end we want to use our model in an application. So we want to use it to create predictions. In order to do so we need to translate our sentence into the corresponding word integers and then pad it to match our data. We can then feed it into our model and see if how it thinks we liked or disliked the movie.
 
 # Summary
 
 In this Post you learned what Sentiment Analysis is and why Keras is one of the most used Deep Learning libraries. On top of that you learned that Keras made a big contribution to the commoditization of deep learning and artificial intelligence. You learned how to build a simple Neural Network with six layers that can predict the sentiment of movie reviews, which achieves a 89% accuracy. You can now use this model to also do binary sentiment analysis on other sources of text but you need to change them all to a length of 10,000 or you change the input-shape of the input layer. You can also apply this model to other related machine learning problems with only a few changes.
+
+        # Using the model to predict sentiments on two specific phrases. 
+
+        bad = "this movie was terrible and bad"
+        good = "the movie is amazing i really liked the movie and had fun"
+
+        for review in [bad]:
+            tmp = []
+        for word in review.split(" "):
+            tmp.append(word_to_id[word])
+            tmp_padded = sequence.pad_sequences([tmp], maxlen=max_review_length) 
+        self.message = Message(master, text="Predicting the Sentiment in a specific phrase: " + str((review,model.predict(array([tmp_padded][0]))[0][0]))+".")
+        self.message.pack()
+
+        if model.predict(array([tmp_padded][0])) > 0.99999 :
+         sentiment = "Negative"
+ 
+        if model.predict(array([tmp_padded][0])) < 0.99999 :
+           sentiment ="Positive"
+
+        self.label = Label(master, text="Sentiment: " + sentiment)
+        self.label.pack() 
+
 
 # Sources and resources:
 
