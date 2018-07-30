@@ -400,5 +400,5 @@ https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-le
 
 https://www.liip.ch/en/blog/sentiment-detection-with-keras-word-embeddings-and-lstm-deep-learning-networks
 
-
+https://github.com/keras-team/keras/blob/master/examples/imdb_cnn.py
 
