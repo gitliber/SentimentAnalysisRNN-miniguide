@@ -1,4 +1,5 @@
 # SentimentAnalysisRNN-miniguide
+<img src="images/RNN-LSTM.jpeg">
 A step by step mini-guide about how your first RNN and use it for Sentiment Analysis
 
 # Purpose
